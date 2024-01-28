@@ -1,0 +1,77 @@
+<!-- Navbar start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">CRUD Operation</a>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <!-- <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="button">Search</button>
+        </form> -->
+        <button (click)="openForm()" type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">ADD
+            EMPLOYEE</button>
+    </div>
+</nav>
+
+<!-- Navbar end -->
+
+
+
+<!-- Modal start -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Employee details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="empForm">
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp"
+                            formControlName="firstName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveForm()">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end -->
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let emp of empList; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{emp.firstName}}</td>
+                <td>{{emp.lastName}}</td>
+                <td class="d-flex gap-2">
+                    <button (click)="editEmp(emp)" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Edit</button>
+                    <button (click)="deleteEmp(emp.id)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
